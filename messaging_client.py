@@ -290,6 +290,7 @@ class MessagingClient:
     # back into a key object. 
     # ----------------------------------------------------------------------
 
+    
     def create_identity(self, name: str) -> None:
         # 1. Generate this user's long-term key pair(s).
         # <your key generation here>
@@ -306,16 +307,17 @@ class MessagingClient:
             "keys": {},               # a dictionary storing the shared key you have agreed with each peer (as b64e text)
         })
 
-        # 3. Set the client ID: a whitespace-free string you share out of band,
+       # 3. Set the client ID: a whitespace-free string you share out of band,
         #    which must never change for this user. Think about how another
         #    user, given this ID, could check that keys claiming to be yours
         #    really are (see verify_contact_keys).
-        self.state["client_id"] = ""   # <set this>
+        # self.state["client_id"] = b64e(public_key_bytes)   # temporary — replace with a hash later
+        self.state["client_id"] = secrets.token_hex(16)   # e.g. "a3f9c2..."
 
         # 4. Rebuild the key objects (and run on every later start too).
         self.load_keys()
     
-        raise NotImplementedError("TODO: create_identity")
+        #raise NotImplementedError("TODO: create_identity")
 
     def load_keys(self) -> None:
         """
