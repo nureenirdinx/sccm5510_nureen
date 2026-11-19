@@ -490,7 +490,7 @@ class MessagingClient:
 
         # 3. Store the key in self.state (keyed by peer_id) so you do not have
         #    to repeat this, and so it survives a restart. Then return it.tImplementedError("TODO: agree_key")
-        raise NotImplementedError("TODO: agree_key")
+        #raise NotImplementedError("TODO: agree_key")
 
 
     def send_message(self, peer_id: str, text: str) -> None:
