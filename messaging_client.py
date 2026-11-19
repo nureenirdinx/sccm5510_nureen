@@ -421,7 +421,7 @@ class MessagingClient:
         has not registered yet. You should not need to change this."""
 
         self._request("POST", "/register", {
-            "client_id": self.client_id,
+            "client_id": self.state["client_id"],
             "name": self.state["name"],
             "public_info": self.public_info(),
         }, authenticated=False)
