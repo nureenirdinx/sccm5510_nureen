@@ -642,6 +642,7 @@ def poll_forever(client: MessagingClient, stop: threading.Event) -> None:
                 else:
                     ui_rejected(event["from"], event["detail"])
         except Exception as e:
+            traceback.print_exc()
             ui_error(f"polling failed: {e}")
         stop.wait(POLL_INTERVAL)
 
@@ -670,6 +671,7 @@ def main():
         client = MessagingClient(args.host, args.port, args.state, args.name, args.insecure)
         client.connect()
     except Exception as e:
+        traceback.print()
         ui_error(f"could not start: {e}")
         sys.exit(1)
 
