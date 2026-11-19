@@ -372,6 +372,7 @@ class MessagingClient:
         #    Return {} if your design needs nothing extra.
         raise NotImplementedError("TODO: server_options")
         """
+        return {}
 
     def auth_headers(self, method: str, path: str, body: bytes) -> dict:
         """
@@ -395,7 +396,8 @@ class MessagingClient:
         # 2. Return it as headers (a dict of strings). Header values must be
         #    strings, so use b64e(...) for any bytes. Include whatever
         #    get_caller needs to identify you and check the proof.
-        raise NotImplementedError("TODO: auth_headers")
+        #raise NotImplementedError("TODO: auth_headers")
+        return {"X-Client-Id": self.client_id}
 
     # ----------------------------------------------------------------------
     # PROVIDED - MAY MODIFY: connecting
