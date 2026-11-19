@@ -1,3 +1,18 @@
+import inspect
+import os
+
+import secrets
+
+def dprint(*args, **kwargs):
+    # Get the caller's stack frame (1 step back from dprint)
+    caller_frame = inspect.currentframe().f_back
+    info = inspect.getframeinfo(caller_frame)
+    filename = os.path.basename(info.filename)
+    
+    # Print the location prefix followed by your standard print arguments
+    print(f"[{filename}:{info.lineno}]", *args, **kwargs)
+
+
 """
 messaging_client.py - SKELETON
 
