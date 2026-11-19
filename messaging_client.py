@@ -454,7 +454,7 @@ class MessagingClient:
     # ----------------------------------------------------------------------
 
 
-    def verify_contact_keys(self, peer_id: str, record: dict) -> dict:
+ def verify_contact_keys(self, peer_id: str, record: dict) -> dict:
         """
         Check that a record returned by GET /lookup/<peer_id> genuinely belongs
         to peer_id, and return the verified public information. Raise
@@ -473,7 +473,7 @@ class MessagingClient:
         #    Raise SecurityError if the check fails.
 
         # 3. Return the verified public information.
-        raise NotImplementedError("TODO: verify_contact_keys")
+        #raise NotImplementedError("TODO: verify_contact_keys")
 
 
     def agree_key(self, peer_id: str, peer_info: dict) -> bytes:
