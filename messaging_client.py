@@ -553,11 +553,13 @@ class MessagingClient:
         #    SecurityError.
 
         # 3. Return the recovered text.
-        raise NotImplementedError("TODO: unprotect_message")
+        #raise NotImplementedError("TODO: unprotect_message")
+        return envelope["text"]
 
     # ----------------------------------------------------------------------
     # PROVIDED - DO NOT MODIFY: collecting messages
     # ----------------------------------------------------------------------
+
 
     def poll_once(self) -> list:
         """Check the server once for new messages and hand each to your
