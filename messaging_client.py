@@ -510,7 +510,10 @@ class MessagingClient:
         # 3. Put it in an envelope (a dict) that includes "from" (your client
         #    ID) and "to" (peer_id), plus whatever the recipient needs to
         #    decrypt it, and send it with POST /send.
-        raise NotImplementedError("TODO: send_message")
+        # raise NotImplementedError("TODO: send_message")
+
+        env = {"from" : self.client_id, "to": peer_id, "status_code":200, "text": text}
+        self._request("POST", "/send", env)
 
 
     def handle_envelope(self, envelope: dict):
@@ -530,7 +533,11 @@ class MessagingClient:
         #    None. You may add a helper function for that.
 
         # 3. For a normal message, call unprotect_message and return the text.
-        raise NotImplementedError("TODO: handle_envelope")
+        #raise NotImplementedError("TODO: handle_envelope")
+
+        if envelope["to"] == self.client_id:
+            text = self.unprotect_message(envelope)
+            return text
 
     def unprotect_message(self, envelope: dict) -> str:
         """
