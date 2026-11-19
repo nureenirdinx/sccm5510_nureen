@@ -341,7 +341,8 @@ class MessagingClient:
         #    example to build public_info or to compute the client ID), you can
         #    derive and store those here too.
 
-        raise NotImplementedError("TODO: load_keys")
+        #raise NotImplementedError("TODO: load_keys")
+        pass
 
 
 
