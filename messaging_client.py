@@ -12,7 +12,6 @@ def dprint(*args, **kwargs):
     # Print the location prefix followed by your standard print arguments
     print(f"[{filename}:{info.lineno}]", *args, **kwargs)
 
-
 """
 messaging_client.py - SKELETON
 
@@ -120,6 +119,7 @@ import os
 import sys
 import threading
 import requests
+import traceback
 
 # ===========================================================================
 # TODO: Add any imports you need here.
@@ -275,6 +275,7 @@ class MessagingClient:
             headers.update(self.auth_headers(method, path, data))
         resp = self.http.request(method, self.server_url + path, data=data or None, headers=headers,
                                  timeout=10, **self.server_options())
+
         try:
             data = resp.json()
         except ValueError:
@@ -290,7 +291,6 @@ class MessagingClient:
     # back into a key object. 
     # ----------------------------------------------------------------------
 
-    
     def create_identity(self, name: str) -> None:
         # 1. Generate this user's long-term key pair(s).
         # <your key generation here>
@@ -307,7 +307,7 @@ class MessagingClient:
             "keys": {},               # a dictionary storing the shared key you have agreed with each peer (as b64e text)
         })
 
-       # 3. Set the client ID: a whitespace-free string you share out of band,
+        # 3. Set the client ID: a whitespace-free string you share out of band,
         #    which must never change for this user. Think about how another
         #    user, given this ID, could check that keys claiming to be yours
         #    really are (see verify_contact_keys).
@@ -370,7 +370,7 @@ class MessagingClient:
 
         # 2. Return the option that points requests at it, for example a dict like {"verify": "<the file name>"}. 
         #    Return {} if your design needs nothing extra.
-        raise NotImplementedError("TODO: server_options")
+        #raise NotImplementedError("TODO: server_options")
         """
         return {}
 
@@ -454,7 +454,7 @@ class MessagingClient:
     # ----------------------------------------------------------------------
 
 
- def verify_contact_keys(self, peer_id: str, record: dict) -> dict:
+    def verify_contact_keys(self, peer_id: str, record: dict) -> dict:
         """
         Check that a record returned by GET /lookup/<peer_id> genuinely belongs
         to peer_id, and return the verified public information. Raise
@@ -559,7 +559,6 @@ class MessagingClient:
     # ----------------------------------------------------------------------
     # PROVIDED - DO NOT MODIFY: collecting messages
     # ----------------------------------------------------------------------
-
 
     def poll_once(self) -> list:
         """Check the server once for new messages and hand each to your
@@ -671,7 +670,7 @@ def main():
         client = MessagingClient(args.host, args.port, args.state, args.name, args.insecure)
         client.connect()
     except Exception as e:
-        traceback.print()
+        traceback.print_exc()
         ui_error(f"could not start: {e}")
         sys.exit(1)
 
